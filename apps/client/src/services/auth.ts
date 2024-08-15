@@ -1,11 +1,21 @@
+import { createSlice, isAnyOf } from '@reduxjs/toolkit'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { HYDRATE } from 'next-redux-wrapper'
 
-import { AuthRequest, AuthResponse } from '@/types/auth'
+import { Auth, AuthRequest, AuthResponse } from '@/types/auth'
 import { apiBaseQuery } from '@/utils/api'
 
-const api = createApi({
-  reducerPath: 'auth',
+const initialState: Record<keyof Auth['ownerUser'], string | null | number> = {
+  id: null,
+  email: null,
+  firstName: null,
+  lastName: null,
+  role: null,
+  username: null,
+}
+
+const authApi = createApi({
+  reducerPath: 'authApi',
   baseQuery: apiBaseQuery,
   tagTypes: ['Auth'],
   refetchOnMountOrArgChange: true,
@@ -34,7 +44,28 @@ const api = createApi({
   },
 })
 
-// Export hooks for usage in functional components
-export const { usePostLoginMutation } = api
+const slice = createSlice({
+  name: 'authSlice',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addMatcher(isAnyOf(authApi.endpoints.postLogin.matchFulfilled), (state, { payload }) => {
+      const { attributes } = payload.data[0]
 
-export default api
+      state.id = attributes.ownerUser.id
+      state.email = attributes.ownerUser.email
+      state.firstName = attributes.ownerUser.firstName
+      state.lastName = attributes.ownerUser.lastName
+      state.role = attributes.ownerUser.role
+      state.username = attributes.ownerUser.username
+    })
+  },
+})
+
+// Export slice
+export const authSlice = slice
+
+// Export hooks for usage in functional components
+export const { usePostLoginMutation } = authApi
+
+export default authApi

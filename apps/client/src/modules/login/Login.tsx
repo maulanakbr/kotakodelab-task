@@ -43,8 +43,6 @@ const Login = () => {
     }
   }, [isSuccess, authData])
 
-  console.log('GEO INFO', currentGeoLocation)
-
   return (
     <MobileLayout title='Login'>
       <div className='min-w-screen flex min-h-screen grow flex-col items-center justify-center space-y-10 px-10'>
@@ -66,7 +64,7 @@ const Login = () => {
               {...register('username', { required: 'Username is required!' })}
               id='username'
               type='text'
-              className='placeholder:text-placeholder w-full rounded border border-solid border-[#EAEAEA] py-3 px-2.5 text-sm font-semibold text-black placeholder:font-bold focus:border-[#EAEAEA] focus:ring-transparent'
+              className='placeholder:text-placeholder w-full rounded border border-solid border-[#EAEAEA] px-2.5 py-3 text-sm font-semibold text-black placeholder:font-bold focus:border-[#EAEAEA] focus:ring-transparent'
             />
           </div>
 
@@ -82,7 +80,7 @@ const Login = () => {
               {...register('password', { required: 'Password is required!' })}
               id='password'
               type='password'
-              className='placeholder:text-placeholder w-full rounded border border-solid border-[#EAEAEA] py-3 px-2.5 text-sm font-semibold text-black placeholder:font-bold focus:border-[#EAEAEA] focus:ring-transparent'
+              className='placeholder:text-placeholder w-full rounded border border-solid border-[#EAEAEA] px-2.5 py-3 text-sm font-semibold text-black placeholder:font-bold focus:border-[#EAEAEA] focus:ring-transparent'
             />
           </div>
 

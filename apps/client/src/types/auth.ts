@@ -3,11 +3,12 @@ import { BaseRequest, BaseResponse } from './common'
 export interface Auth {
   ownerUser: {
     id: string
-    staffId: string
+    // staffId: string
     firstName: string
     lastName: string
     email: string
     username: string
+    role: number
   }
   expiredIn: number
   accessToken: string

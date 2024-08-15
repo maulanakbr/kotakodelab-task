@@ -10,6 +10,9 @@ const Home: React.FC = () => {
   const router = useRouter()
   const { t } = useTranslation(['common', 'home'])
 
+  // slice
+  // const auth = useAppSelector((state) => state.authSlice)
+
   return (
     <Blank title={t('home:title')}>
       <main className='min-h-screen bg-gray-100'>
@@ -25,7 +28,7 @@ const Home: React.FC = () => {
               href={{ pathname: '/examples', query: { lang: router.query.lang } }}
               locale={router.locale}
             >
-              <a className='mt-6 py-2 px-4 text-sm font-medium underline'>{t('home:example')}</a>
+              <a className='mt-6 px-4 py-2 text-sm font-medium underline'>{t('home:example')}</a>
             </Link>
           </div>
         </section>

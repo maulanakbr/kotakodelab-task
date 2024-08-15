@@ -7,7 +7,7 @@ import Language from '@/components/Language'
 import Skeleton from '@/components/Skeleton'
 import Blank from '@/layouts/Blank'
 import { useGetListStaffsQuery } from '@/services/staffs'
-import { Staff, StaffBrowseRequest } from '@/types/staff'
+import { StaffBrowseRequest } from '@/types/staff'
 
 const ExampleList: FC = () => {
   const router = useRouter()
@@ -32,13 +32,13 @@ const ExampleList: FC = () => {
 
           <div className='flex flex-row justify-center'>
             <Link href={{ pathname: '/', query: { lang: router.query.lang } }}>
-              <a className='mt-6 py-2 px-4 text-sm font-medium underline'>
+              <a className='mt-6 px-4 py-2 text-sm font-medium underline'>
                 {t('common:backTo', { page: t('common:titles.home') })}
               </a>
             </Link>
           </div>
 
-          <div className='mx-3 mt-6 grid grid-cols-1 gap-y-10 gap-x-2 sm:grid-cols-1 lg:grid-cols-2'>
+          <div className='mx-3 mt-6 grid grid-cols-1 gap-x-2 gap-y-10 sm:grid-cols-1 lg:grid-cols-2'>
             {isLoading &&
               [1, 2, 3, 4].map((_, idx) => (
                 <Skeleton
@@ -52,11 +52,11 @@ const ExampleList: FC = () => {
                 key={index}
                 className='group relative'
               >
-                <div className='min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80'>
+                <div className='aspect-h-1 aspect-w-1 min-h-80 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80'>
                   <img
                     src={`https://ui-avatars.com/api/?name=${attributes.firstName}+${attributes.lastName}&background=0D8ABC&color=fff`}
                     alt={attributes.fullName}
-                    className='h-full w-full object-cover object-center lg:h-full lg:w-full'
+                    className='size-full object-cover object-center lg:size-full'
                     loading='lazy'
                   />
                 </div>
