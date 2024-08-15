@@ -5,13 +5,13 @@ import { HYDRATE } from 'next-redux-wrapper'
 import { Auth, AuthRequest, AuthResponse } from '@/types/auth'
 import { apiBaseQuery } from '@/utils/api'
 
-const initialState: Record<keyof Auth['ownerUser'], string | null | number> = {
-  id: null,
-  email: null,
-  firstName: null,
-  lastName: null,
-  role: null,
-  username: null,
+const initialState: Record<keyof Auth['ownerUser'], Auth['ownerUser'][keyof Auth['ownerUser']] | undefined> = {
+  id: undefined,
+  email: undefined,
+  firstName: undefined,
+  lastName: undefined,
+  role: undefined,
+  username: undefined,
 }
 
 const authApi = createApi({

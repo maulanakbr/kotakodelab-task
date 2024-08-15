@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@kotakodelab/ui": "*",
+    "@kotakodelab/lib": "*",
     "@reduxjs/toolkit": "^1.8.4",
     "@sentry/nextjs": "^7.12.1",
     "@tanem/react-nprogress": "^5.0.11",

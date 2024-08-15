@@ -1,3 +1,5 @@
+import { RoleValues } from '@kotakodelab/lib'
+
 import { BaseRequest, BaseResponse } from './common'
 
 export interface Auth {
@@ -8,7 +10,7 @@ export interface Auth {
     lastName: string
     email: string
     username: string
-    role: number
+    role: RoleValues
   }
   expiredIn: number
   accessToken: string
