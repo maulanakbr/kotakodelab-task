@@ -1,40 +1,39 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React from 'react'
-import { useTranslation } from 'react-i18next'
+import { AdminLayout } from '@kotakodelab/ui'
+import * as React from 'react'
 
-import Language from '@/components/Language'
-import Blank from '@/layouts/Blank'
+import StaffLayout from '@/layouts/StaffLayout'
+import SuperAdminLayout from '@/layouts/SuperAdminLayout'
+import { ROLES } from '@/utils/constants'
+import { useAppSelector } from '@/utils/hooks'
 
-const Home: React.FC = () => {
-  const router = useRouter()
-  const { t } = useTranslation(['common', 'home'])
-
-  // slice
-  // const auth = useAppSelector((state) => state.authSlice)
-
-  return (
-    <Blank title={t('home:title')}>
-      <main className='min-h-screen bg-gray-100'>
-        <section className='mx-auto min-h-screen max-w-screen-sm bg-white py-10'>
-          <div className='flex flex-row items-center justify-between px-6 text-center'>
-            <h1 className='font-primary text-2xl font-bold md:text-4xl'>{t('common:titles.home')}</h1>
-
-            <Language />
-          </div>
-
-          <div className='flex flex-row justify-center'>
-            <Link
-              href={{ pathname: '/examples', query: { lang: router.query.lang } }}
-              locale={router.locale}
-            >
-              <a className='mt-6 px-4 py-2 text-sm font-medium underline'>{t('home:example')}</a>
-            </Link>
-          </div>
-        </section>
-      </main>
-    </Blank>
-  )
+const layouts = {
+  [ROLES.SUPERADMIN]: SuperAdminLayout,
+  // [ROLES.ADMIN]: AdminLayout,
+  [ROLES.STAFF]: StaffLayout,
 }
 
-export default Home
+export default function Home() {
+  const { role } = useAppSelector((state) => state.auth)
+
+  if (ROLES['SUPERADMIN'] === role) {
+    return (
+      <SuperAdminLayout>
+        <div>Children</div>
+      </SuperAdminLayout>
+    )
+  }
+
+  if (ROLES['ADMIN'] === role) {
+    return (
+      <AdminLayout>
+        <div>Children</div>
+      </AdminLayout>
+    )
+  }
+
+  return (
+    <StaffLayout>
+      <div>Children</div>
+    </StaffLayout>
+  )
+}

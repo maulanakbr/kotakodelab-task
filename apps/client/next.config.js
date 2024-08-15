@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const withTM = require('next-transpile-modules')(['@kotakodelab/ui'])
+
+module.exports = withTM({
   reactStrictMode: true,
 
   distDir: process.env.NODE_ENV === 'production' ? '.next' : '.next-dev',
@@ -13,7 +16,6 @@ module.exports = {
   eslint: {
     dirs: ['src'],
   },
-
   env: {
     // APP
     APP_NAME: process.env.APP_NAME,
@@ -61,4 +63,4 @@ module.exports = {
 
     return config
   },
-}
+})

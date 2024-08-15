@@ -1,9 +1,14 @@
-import * as React from 'react'
+import { ReactNode } from 'react'
 
-export default function StaffLayout() {
+interface AdminLayoutProps {
+  children: ReactNode
+}
+
+export default function StaffLayout({ children }: AdminLayoutProps) {
   return (
     <div>
       <h1>This Is Staff Layout</h1>
+      {children}
     </div>
   )
 }

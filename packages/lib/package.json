@@ -1,0 +1,14 @@
+{
+  "name": "@kotakodelab/lib",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "tailwind-merge": "^1.6.0",
+    "clsx": "^1.2.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.0"
+  }
+}

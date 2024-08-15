@@ -15,6 +15,7 @@
     "typecheck": "tsc --noEmit --incremental false"
   },
   "dependencies": {
+    "@kotakodelab/ui": "*",
     "@reduxjs/toolkit": "^1.8.4",
     "@sentry/nextjs": "^7.12.1",
     "@tanem/react-nprogress": "^5.0.11",
@@ -26,6 +27,7 @@
     "next": "^12.2.0",
     "next-redux-wrapper": "^7.0.5",
     "next-seo": "^5.5.0",
+    "next-transpile-modules": "9.1.0",
     "qs": "^6.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

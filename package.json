@@ -12,10 +12,12 @@
     "dev": "turbo dev --parallel",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "clean": "turbo clean"
+    "turbo-clean": "turbo clean",
+    "clean": "find . -name node_modules -o -name .next -o -name .turbo -o -name dist -type d -prune | xargs rm -rf"
   },
   "devDependencies": {
-    "turbo": "^2.0.12"
+    "turbo": "^2.0.12",
+    "typescript": "^4.7.0"
   },
   "packageManager": "yarn@1.22.19",
   "engines": {
