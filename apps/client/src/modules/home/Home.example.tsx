@@ -24,7 +24,10 @@ const Home: React.FC = () => {
 
           <div className='flex flex-row justify-center'>
             <Link
-              href={{ pathname: '/examples', query: { lang: router.query.lang } }}
+              href={{
+                pathname: '/examples',
+                query: { lang: router.query.lang },
+              }}
               locale={router.locale}
             >
               <a className='mt-6 px-4 py-2 text-sm font-medium underline'>{t('home:example')}</a>

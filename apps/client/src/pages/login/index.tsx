@@ -1,5 +1,5 @@
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 
-const Page = dynamic(() => import('@/modules/login'), { ssr: false })
+const Page = dynamic(() => import("@/modules/login"), { ssr: false });
 
-export default Page
+export default Page;

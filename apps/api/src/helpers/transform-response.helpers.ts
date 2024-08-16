@@ -1,11 +1,11 @@
+import { enumerateParser } from './enumerate-parser.helper';
+import { camelCase } from 'change-case';
 import { Transform } from 'class-transformer';
 import { parsePhoneNumber } from 'libphonenumber-js';
 import { castArray, isArray, isNil, map, trim } from 'lodash';
-import { Resource } from 'src/common/resource';
 import { BaseEntity } from 'src/common/base.entity';
+import { Resource } from 'src/common/resource';
 import { TransformApiResource } from 'src/interfaces/transform.interface';
-import { camelCase } from 'change-case';
-import { enumerateParser } from './enumerate-parser.helper';
 
 /**
  * @description trim spaces from start and end, replace multiple spaces with one.

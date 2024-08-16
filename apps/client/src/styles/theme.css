@@ -3,6 +3,36 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --kotakodelab-bg-emphasis: 0, 0%, 93%;
+    --kotakodelab-bg: 0, 0%, 100%;
+    --kotakodelab-bg-muted: 210, 20%, 98%;
+    --kotakodelab-bg-inverted: 221, 39%, 11%;
+
+    --kotakodelab-bg-info: 199, 100%, 87%;
+    --kotakodelab-bg-success: 109, 47%, 88%;
+    --kotakodelab-bg-error: 0, 100%, 91%;
+    --kotakodelab-bg-dark-error: 2, 55%, 30%;
+
+    --kotakodelab-border-emphasis: 218, 11%, 65%;
+    --kotakodelab-border: 216, 12%, 84%;
+    --kotakodelab-border-subtle: 220, 13%, 91%;
+    --kotakodelab-border-muted: 220, 14%, 96%;
+    --kotakodelab-border-error: 4, 63%, 41%;
+
+    --kotakodelab-text-emphasis: 221, 39%, 11%;
+    --kotakodelab-text: 217, 19%, 27%;
+    --kotakodelab-text-subtle: 220, 9%, 46%;
+    --kotakodelab-text-muted: 218, 11%, 65%;
+    --kotakodelab-text-inverted: 0, 0%, 100%;
+
+    --kotakodelab-text-info: 228, 56%, 33%;
+    --kotakodelab-text-success: 133, 34%, 24%;
+    --kotakodelab-text-error: 2, 55%, 30%;
+
+    --kotakodelab-brand: 221, 39%, 11%;
+    --kotakodelab-brand-emphasis: 0, 0%, 6%;
+  }
 }
 
 @layer components {

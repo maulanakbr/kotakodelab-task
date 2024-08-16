@@ -1,14 +1,14 @@
-import { useNProgress } from '@tanem/react-nprogress'
-import React from 'react'
+import { useNProgress } from "@tanem/react-nprogress";
+import React from "react";
 
 interface LoadingProps {
-  isRouteChanging: boolean
+  isRouteChanging: boolean;
 }
 
 const Loading: React.FC<LoadingProps> = ({ isRouteChanging }) => {
   const { animationDuration, isFinished, progress } = useNProgress({
     isAnimating: isRouteChanging,
-  })
+  });
 
   return (
     <>
@@ -45,13 +45,13 @@ const Loading: React.FC<LoadingProps> = ({ isRouteChanging }) => {
         `}
       </style>
 
-      <div className='loading'>
-        <div className='bar'>
-          <div className='spinner' />
+      <div className="loading">
+        <div className="bar">
+          <div className="spinner" />
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default React.memo(Loading)
+export default React.memo(Loading);

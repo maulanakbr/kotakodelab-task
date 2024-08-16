@@ -1,6 +1,6 @@
+import { getVariableName } from './get-variable.helpers';
 import type { ApiPropertyOptions } from '@nestjs/swagger';
 import { ApiProperty } from '@nestjs/swagger';
-import { getVariableName } from './get-variable.helpers';
 
 export function ApiBooleanProperty(
   options: Omit<ApiPropertyOptions, 'type'> = {},

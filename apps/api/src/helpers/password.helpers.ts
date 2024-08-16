@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+
 /**
  * generate hash from password or string
  * @param {string} password

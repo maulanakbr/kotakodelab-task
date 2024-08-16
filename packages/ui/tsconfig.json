@@ -1,9 +1,0 @@
-{
-  "extends": "@kotakodelab/tsconfig/react-library.json",
-  "compilerOptions": {
-    "resolveJsonModule": true,
-    "experimentalDecorators": true
-  },
-  "include": ["../types/*.d.ts", "../types/next-auth.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["dist", "build", "node_modules"]
-}

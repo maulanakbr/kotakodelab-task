@@ -11,6 +11,7 @@ export interface Auth {
     email: string
     username: string
     role: RoleValues
+    companyId: string
   }
   expiredIn: number
   accessToken: string

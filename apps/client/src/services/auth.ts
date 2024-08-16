@@ -12,6 +12,7 @@ const initialState: Record<keyof Auth['ownerUser'], Auth['ownerUser'][keyof Auth
   lastName: undefined,
   role: undefined,
   username: undefined,
+  companyId: undefined,
 }
 
 const authApi = createApi({
@@ -58,6 +59,7 @@ const slice = createSlice({
       state.lastName = attributes.ownerUser.lastName
       state.role = attributes.ownerUser.role
       state.username = attributes.ownerUser.username
+      state.companyId = attributes.ownerUser.companyId
     })
   },
 })

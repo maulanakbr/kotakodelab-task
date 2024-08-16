@@ -1,19 +1,19 @@
-import * as bodyParser from 'body-parser';
+import { AppModule } from './app.module';
+import { attachJsonApiSender } from './helpers/attach-json-api-sender.helpers';
+import { jsonApiBodyValidatorAndFormatter } from './helpers/json-body-validator.helpers';
+import { TransformResponseInterceptor } from './interceptors/transform-response.interceptor';
+import { JwtAuthGuard } from './modules/auth/guard/auth.guard';
+import { RoleGuard } from './modules/auth/guard/role.guard';
+import { DatabaseConfigService } from './shared/config/database.service';
+import { SharedModule } from './shared/shared.module';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
 import {
   ExpressAdapter,
   NestExpressApplication,
 } from '@nestjs/platform-express';
+import * as bodyParser from 'body-parser';
 import helmet from 'helmet';
-import { AppModule } from './app.module';
-import { attachJsonApiSender } from './helpers/attach-json-api-sender.helpers';
-import { jsonApiBodyValidatorAndFormatter } from './helpers/json-body-validator.helpers';
-import { DatabaseConfigService } from './shared/config/database.service';
-import { SharedModule } from './shared/shared.module';
-import { TransformResponseInterceptor } from './interceptors/transform-response.interceptor';
-import { JwtAuthGuard } from './modules/auth/guard/auth.guard';
-import { RoleGuard } from './modules/auth/guard/role.guard';
 
 async function bootstrap(): Promise<NestExpressApplication> {
   const app = await NestFactory.create<NestExpressApplication>(

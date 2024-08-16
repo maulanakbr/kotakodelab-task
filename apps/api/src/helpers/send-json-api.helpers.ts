@@ -1,11 +1,11 @@
-import { camelCase } from 'change-case';
-import { Response } from 'express';
-import ApiError from '../errors/ApiError';
 import { BaseEntity } from '../common/base.entity';
-import { Resource } from '../common/resource';
 import { PageMetaDto } from '../common/dto/page-meta.dto';
+import { Resource } from '../common/resource';
+import ApiError from '../errors/ApiError';
 import { HttpStatus } from '@nestjs/common';
+import { camelCase } from 'change-case';
 import { instanceToPlain } from 'class-transformer';
+import { Response } from 'express';
 
 /**
  * The interface that defines the resource sent to client.

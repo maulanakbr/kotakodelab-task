@@ -1,3 +1,3 @@
-import Page from '@/modules/example/list'
+import Page from "@/modules/example/list";
 
-export default Page
+export default Page;

@@ -1,3 +1,3 @@
-import Page from '@/modules/health'
+import Page from "@/modules/health";
 
-export default Page
+export default Page;

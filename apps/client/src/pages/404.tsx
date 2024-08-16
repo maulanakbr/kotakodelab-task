@@ -1,3 +1,3 @@
-import Page from '@/modules/error/not-found'
+import Page from "@/modules/error/not-found";
 
-export default Page
+export default Page;

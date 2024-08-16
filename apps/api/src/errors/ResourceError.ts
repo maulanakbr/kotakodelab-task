@@ -1,5 +1,5 @@
-import { HttpStatus } from '@nestjs/common';
 import ApiError from './ApiError';
+import { HttpStatus } from '@nestjs/common';
 
 /**
  * Admin-Related Errors

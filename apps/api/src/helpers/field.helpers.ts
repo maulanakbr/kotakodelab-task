@@ -1,4 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-types */
+import { ApiEnumProperty, ApiUUIDProperty } from './property.helpers';
+import {
+  PhoneNumberSerializer,
+  ToArray,
+  ToBoolean,
+  ToLowerCase,
+  ToUpperCase,
+  Trim,
+} from './transform-response.helpers';
+import { IsPassword, IsPhoneNumber, IsTmpKey } from './validator.helpers';
 import { applyDecorators } from '@nestjs/common';
 import type { ApiPropertyOptions } from '@nestjs/swagger';
 import { ApiProperty } from '@nestjs/swagger';
@@ -23,16 +33,6 @@ import {
   MinLength,
   ValidateNested,
 } from 'class-validator';
-import { ApiEnumProperty, ApiUUIDProperty } from './property.helpers';
-import {
-  PhoneNumberSerializer,
-  ToArray,
-  ToBoolean,
-  ToLowerCase,
-  ToUpperCase,
-  Trim,
-} from './transform-response.helpers';
-import { IsPassword, IsPhoneNumber, IsTmpKey } from './validator.helpers';
 
 type RequireField<T, K extends keyof T> = T & Required<Pick<T, K>>;
 

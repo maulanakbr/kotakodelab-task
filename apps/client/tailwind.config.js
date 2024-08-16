@@ -3,6 +3,26 @@ module.exports = {
   content: ['./src/**/*.{ts,tsx}'],
   theme: {
     extend: {
+      colors: {
+        DEFAULT: 'hsl(var(--kotakodelab-bg))',
+        emphasis: 'hsl(var(--kotakodelab-bg-emphasis))',
+        muted: 'hsl(var(--kotakodelab-bg-muted))',
+        inverted: 'hsl(var(--kotakodelab-bg-inverted))',
+        info: 'hsl(var(--kotakodelab-bg-info))',
+        success: 'hsl(var(--kotakodelab-bg-success))',
+        error: 'hsl(var(--kotakodelab-bg-error))',
+        'dark-error': 'hsl(var(--kotakodelab-bg-dark-error))',
+      },
+      textColor: {
+        DEFAULT: 'hsl(var(--kotakodelab-text))',
+        emphasis: 'hsl(var(--kotakodelab-text-emphasis))',
+        subtle: 'hsl(var(--kotakodelab-text-subtle))',
+        muted: 'hsl(var(--kotakodelab-text-muted))',
+        inverted: 'hsl(var(--kotakodelab-text-inverted))',
+        info: 'hsl(var(--kotakodelab-text-info))',
+        success: 'hsl(var(--kotakodelab-text-success))',
+        error: 'hsl(var(--kotakodelab-text-error))',
+      },
       fontFamily: {
         body: ["'Poppins'"],
         poppins: ['Poppins', 'sans-serif'],

@@ -1,10 +1,10 @@
-import { NextPage } from 'next'
-import React from 'react'
+import { NextPage } from "next";
+import React from "react";
 
-import ExampleDetail from './ExampleDetail'
+import ExampleDetail from "./ExampleDetail";
 
 const Page: NextPage = () => {
-  return <ExampleDetail />
-}
+  return <ExampleDetail />;
+};
 
-export default Page
+export default Page;

@@ -1,11 +1,11 @@
 // App Access Token
-export const APP_ACCESS_TOKEN = ''
+export const APP_ACCESS_TOKEN = "";
 
 // User Access Token
-export const USER_ACCESS_TOKEN = 'hris-uat'
+export const USER_ACCESS_TOKEN = "hris-uat";
 
 // User Refresh Token
-export const USER_REFRESH_TOKEN = ''
+export const USER_REFRESH_TOKEN = "";
 
 // User Data
-export const USER_DATA = ''
+export const USER_DATA = "";

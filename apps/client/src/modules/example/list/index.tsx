@@ -1,10 +1,10 @@
-import { NextPage } from 'next'
-import React from 'react'
+import { NextPage } from "next";
+import React from "react";
 
-import ExampleList from './ExampleList'
+import ExampleList from "./ExampleList";
 
 const Page: NextPage = () => {
-  return <ExampleList />
-}
+  return <ExampleList />;
+};
 
-export default Page
+export default Page;

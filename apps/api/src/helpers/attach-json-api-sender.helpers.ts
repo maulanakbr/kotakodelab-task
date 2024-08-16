@@ -1,7 +1,7 @@
-import { NextFunction, Request, Response } from 'express';
 import { PageMetaDto } from '../common/dto/page-meta.dto';
 import { Resource } from '../common/resource';
 import { sendJsonApiError, sendJsonApiResource } from './send-json-api.helpers';
+import { NextFunction, Request, Response } from 'express';
 
 export const attachJsonApiSender = (
   _req: Request,

@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const withTM = require('next-transpile-modules')(['@kotakodelab/ui', '@kotakodelab/lib'])
+const withTM = require('next-transpile-modules')(['@kotakodelab/lib', '@kotakodelab/tsconfig'])
 
 module.exports = withTM({
   reactStrictMode: true,

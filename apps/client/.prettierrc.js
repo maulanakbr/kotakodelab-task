@@ -15,4 +15,4 @@ module.exports = {
   endOfLine: 'lf',
   useTabs: false,
   plugins: [require('prettier-plugin-tailwindcss')],
-};
+}

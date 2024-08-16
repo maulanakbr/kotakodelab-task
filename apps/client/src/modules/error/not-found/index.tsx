@@ -1,10 +1,10 @@
-import { NextPage } from 'next'
-import React from 'react'
+import { NextPage } from "next";
+import React from "react";
 
-import NotFound from './NotFound'
+import NotFound from "./NotFound";
 
 const Page: NextPage = () => {
-  return <NotFound />
-}
+  return <NotFound />;
+};
 
-export default Page
+export default Page;

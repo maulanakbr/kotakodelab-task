@@ -1,3 +1,3 @@
-import Page from '@/modules/example/detail'
+import Page from "@/modules/example/detail";
 
-export default Page
+export default Page;

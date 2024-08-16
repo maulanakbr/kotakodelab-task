@@ -1,10 +1,10 @@
-import { NextPage } from 'next'
-import React from 'react'
+import { NextPage } from "next";
+import React from "react";
 
-import HealthCard from './HealthCard'
+import HealthCard from "./HealthCard";
 
 const Page: NextPage = () => {
-  return <HealthCard />
-}
+  return <HealthCard />;
+};
 
-export default Page
+export default Page;
