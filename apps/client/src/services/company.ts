@@ -12,7 +12,7 @@ const companyApi = createApi({
   keepUnusedDataFor: 259200, // 3 days
   endpoints: (builder) => ({
     getCompany: builder.query<CompanyResponse, { companyId: string }>({
-      query: (companyId) => ({
+      query: ({ companyId }) => ({
         url: `/companies/${companyId}`,
         method: 'GET',
       }),

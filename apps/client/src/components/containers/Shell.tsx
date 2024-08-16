@@ -4,12 +4,10 @@ import AdminLayout from '@/layouts/AdminLayout'
 import StaffLayout from '@/layouts/StaffLayout'
 import SuperAdminLayout from '@/layouts/SuperAdminLayout'
 
-import WelcomeBoard from '../shared/WelcomeBoard'
-
 interface ShellProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
-  userRole: RoleValues
   companyId: string
+  userRole: RoleValues
   username: string
 }
 
@@ -21,15 +19,16 @@ const layoutOptions: Record<RoleValues, LayoutValues> = {
   [ROLES['STAFF']]: StaffLayout,
 }
 
-export default function Shell({ children, userRole, companyId, username, ...props }: ShellProps) {
+export default function Shell({ children, companyId, userRole, username, ...props }: ShellProps) {
   const Layout = layoutOptions[userRole] || StaffLayout
 
   return (
-    <Layout companyId={companyId}>
-      <WelcomeBoard
-        userRole={userRole}
-        username={username}
-      />
+    <Layout
+      userRole={userRole}
+      companyId={companyId}
+      username={username}
+      {...props}
+    >
       {children}
     </Layout>
   )

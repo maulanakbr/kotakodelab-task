@@ -11,6 +11,7 @@ import Loading from '@/components/Loading'
 import i18n from '@/config/i18n'
 import CheckingUserToken from '@/layouts/CheckingUserToken'
 import { wrapper } from '@/store'
+import MainContainer from '@/components/containers/MainContainer'
 
 const MyApp: React.FC<AppProps> = (props) => {
   const { Component, pageProps } = props
@@ -61,9 +62,11 @@ const MyApp: React.FC<AppProps> = (props) => {
         key={progress.loadingKey}
         isRouteChanging={progress.isRouteChanging}
       />
-      <CheckingUserToken>
-        <Component {...pageProps} />
-      </CheckingUserToken>
+      <MainContainer>
+        <CheckingUserToken>
+          <Component {...pageProps} />
+        </CheckingUserToken>
+      </MainContainer>
     </I18nextProvider>
   )
 }

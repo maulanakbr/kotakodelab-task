@@ -23,9 +23,16 @@ module.exports = {
         success: 'hsl(var(--kotakodelab-text-success))',
         error: 'hsl(var(--kotakodelab-text-error))',
       },
+      borderColor: {
+        DEFAULT: 'hsl(var(--kotakodelab-border))',
+        emphasis: 'hsl(var(--kotakodelab-border-emphasis))',
+        subtle: 'hsl(var(--kotakodelab-border-subtle))',
+        muted: 'hsl(var(--kotakodelab-border-muted))',
+        inverted: 'hsl(var(--kotakodelab-border-inverted))',
+      },
       fontFamily: {
-        body: ["'Poppins'"],
         poppins: ['Poppins', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
       },
       keyframes: {
         flicker: {

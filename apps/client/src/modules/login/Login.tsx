@@ -36,8 +36,6 @@ const Login = () => {
           attributes: { accessToken },
         } = authData.data[0]
 
-        console.log(authData.data[0])
-
         setCookie(USER_ACCESS_TOKEN, accessToken)
       }
 
