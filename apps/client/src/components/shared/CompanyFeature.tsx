@@ -1,6 +1,7 @@
+import { titleCase } from '@kotakodelab/lib'
+
 import { useGetCompanyQuery } from '@/services/company'
 import clsxm from '@/utils/clsxm'
-import { titleCase } from '@kotakodelab/lib'
 
 interface CompanyFeatureProps {
   className?: string
@@ -15,7 +16,7 @@ export default function CompanyFeature({ className, companyId }: CompanyFeatureP
       <h3 className='text-left font-poppins text-[42px] font-bold leading-[3.5rem] text-emphasis'>
         {companyData?.data[0].attributes.name ?? ''}
       </h3>
-      <p className='text-[14px] leading-[1.25rem] tracking-normal'>
+      <p className='text-[14px] leading-5 tracking-normal'>
         {titleCase(companyData?.data[0].attributes.description ?? '')}
       </p>
     </div>

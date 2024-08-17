@@ -1,5 +1,5 @@
-import { BaseResponse } from './common'
-import { Staff } from './staff'
+import type { BaseResponse } from './common'
+import type { Staff } from './staff'
 
 export interface Company {
   id: string

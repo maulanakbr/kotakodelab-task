@@ -15,7 +15,7 @@ export class CompanyController {
   @Post()
   @Role(AuthEntityTypeEnum.SUPERADMIN)
   @UseGuards(JwtAuthGuard, RoleGuard)
-  async create(@CurrentUser() user: IStaff, @Body() options: CreateCompanyDto) {
+  async create(@CurrentUser() @Body() options: CreateCompanyDto) {
     const company = await this.companyService.create(options);
     return { data: company };
   }

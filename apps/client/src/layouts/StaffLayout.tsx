@@ -22,7 +22,7 @@ export default function StaffLayout({
 }: StaffLayoutProps) {
   return (
     <section
-      className='flex max-h-screen w-full flex-col gap-[10rem]'
+      className='flex max-h-screen w-full flex-col gap-[5rem]'
       {...props}
     >
       <div className='grid grid-flow-col-dense grid-rows-4 gap-4 lg:grid-rows-8'>
@@ -37,7 +37,7 @@ export default function StaffLayout({
           username={username}
         />
       </div>
-      <div className='flex-grow'>{children}</div>
+      <div className='h-[15rem] flex-grow'>{children}</div>
       <MutualStaff companyId={companyId} />
     </section>
   )

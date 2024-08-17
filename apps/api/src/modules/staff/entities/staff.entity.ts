@@ -15,7 +15,6 @@ import { Attendance } from 'src/modules/attendance/entities/attendance.entity';
 
 export interface IStaff {
   id: string;
-  staffId: string;
   firstName: string;
   lastName: string;
   email: string;

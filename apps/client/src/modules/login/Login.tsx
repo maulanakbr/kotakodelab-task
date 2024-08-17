@@ -7,11 +7,9 @@ import { USER_ACCESS_TOKEN } from '@/config/token'
 import MobileLayout from '@/layouts/MobileLayout'
 import { usePostLoginMutation } from '@/services/auth'
 import { AuthForm } from '@/types/auth'
-import { useGeoLocation } from '@/utils/hooks'
 
 const Login = () => {
   const router = useRouter()
-  const { currentGeoLocation, errMessage } = useGeoLocation()
 
   const { register, handleSubmit } = useForm<AuthForm>({
     mode: 'onChange',

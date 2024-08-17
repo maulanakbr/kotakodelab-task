@@ -1,4 +1,12 @@
-import { Body, Controller, Param, Post, Put, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { AttendanceService } from './attendance.service';
 import {
   AttendanceClockInDto,
@@ -39,6 +47,14 @@ export class AttendanceController {
       user,
       attendanceId,
     );
+    return { data: attendance };
+  }
+
+  @Get(':staffId')
+  @Role(AuthEntityTypeEnum.STAFF)
+  @UseGuards(JwtAuthGuard, RoleGuard)
+  async findByStaffId(@Param('staffId') staffId: string) {
+    const attendance = await this.attendanceService.findByStaffId(staffId);
     return { data: attendance };
   }
 }

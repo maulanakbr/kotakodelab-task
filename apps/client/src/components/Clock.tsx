@@ -1,6 +1,7 @@
-import clsxm from '@/utils/clsxm'
 import { getDate, getDateTime } from '@kotakodelab/lib'
 import { useEffect, useState } from 'react'
+
+import clsxm from '@/utils/clsxm'
 
 interface ClockProps {
   className?: string
@@ -22,7 +23,7 @@ export default function Clock({ className }: ClockProps) {
 
   return (
     <div className={clsxm('h-full min-w-[20rem] text-left', className)}>
-      <p className='text-[42px] font-semibold leading-[3.5rem] text-emphasis'>{clock}</p>
+      <p className='text-[42px] font-medium leading-[3.5rem] text-subtle'>{clock}</p>
       <p className='text-[14px]'>{getDate(new Date())}</p>
     </div>
   )

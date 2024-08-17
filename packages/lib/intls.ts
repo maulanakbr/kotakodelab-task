@@ -15,3 +15,11 @@ export const getDateTime = (date: Date) => {
 
   return currentTime;
 };
+
+export const formatTime = (): string => {
+  const now = new Date();
+  return now.toLocaleTimeString('en-GB', {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+};

@@ -15,7 +15,7 @@ export default function MainContainer({ className, children, ...props }: MainCon
   return (
     <main
       className={clsxm(
-        'flex min-h-screen w-full flex-col bg px-[4rem] py-[2rem] font-inter text-[12.5px] leading-none tracking-tight text md:px-[14rem]',
+        'min-h-screen w-full bg px-[4rem] py-[2rem] font-inter text-[12.5px] leading-none tracking-tight text md:px-[14rem]',
         className
       )}
       {...props}

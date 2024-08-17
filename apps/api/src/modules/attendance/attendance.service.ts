@@ -29,17 +29,9 @@ export class AttendanceService {
     options: AttendanceClockInDto,
     user: IStaff,
   ): Promise<Attendance> {
-    const findAttendances = await this.attendanceRepository.find({
-      where: {
-        staff: {
-          id: user.id,
-        },
-      },
-      order: { createdAt: 'DESC' },
-    });
+    const findAttendance = await this.findByStaffId(user.id);
 
-    if (findAttendances.length > 0 && findAttendances[0].clockIn)
-      AttendanceAlreadyFulfilledError();
+    if (findAttendance) AttendanceAlreadyFulfilledError();
 
     const findCompany = await this.companyService.findOne(user.companyId);
     if (
@@ -86,6 +78,14 @@ export class AttendanceService {
     attendance.clockOut = options.clockOut;
 
     await attendance.save();
+    return attendance;
+  }
+
+  async findByStaffId(staffId: string): Promise<Attendance> {
+    const attendance = await this.attendanceRepository.findOne({
+      where: { staffId, createdAt: String(new Date()) },
+    });
+
     return attendance;
   }
 }
