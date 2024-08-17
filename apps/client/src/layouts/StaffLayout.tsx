@@ -1,8 +1,9 @@
+import type { RoleValues } from '@kotakodelab/lib'
+
 import Clock from '@/components/Clock'
 import CompanyFeature from '@/components/shared/CompanyFeature'
 import MutualStaff from '@/components/shared/MutualStaff'
 import WelcomeBoard from '@/components/shared/WelcomeBoard'
-import type { RoleValues } from '@kotakodelab/lib'
 
 export interface StaffLayoutProps extends React.HTMLAttributes<HTMLElement> {
   className?: string
@@ -22,7 +23,7 @@ export default function StaffLayout({
 }: StaffLayoutProps) {
   return (
     <section
-      className='flex max-h-screen w-full flex-col gap-[5rem]'
+      className='flex max-h-screen w-full flex-col gap-12'
       {...props}
     >
       <div className='grid grid-flow-col-dense grid-rows-4 gap-4 lg:grid-rows-8'>
@@ -37,7 +38,7 @@ export default function StaffLayout({
           username={username}
         />
       </div>
-      <div className='h-[15rem] flex-grow'>{children}</div>
+      <div className='min-h-72 grow'>{children}</div>
       <MutualStaff companyId={companyId} />
     </section>
   )

@@ -28,20 +28,20 @@ export class BaseEntityWithUUID extends TOBaseEntity {
 
 export class BaseEntityWithTimestamp extends BaseEntityWithUUID {
   @Column()
-  createdAt: string;
+  createdAt: Date;
 
   @Column({
     nullable: true,
   })
-  updatedAt?: string | null;
+  updatedAt?: Date | null;
 
   @BeforeInsert()
   setCreatedAt() {
-    this.createdAt = new Date().toString();
+    this.createdAt = new Date();
   }
 
   @BeforeUpdate()
   setUpdatedAt() {
-    this.updatedAt = new Date().toString();
+    this.updatedAt = new Date();
   }
 }

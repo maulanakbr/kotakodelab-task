@@ -12,11 +12,16 @@ export interface Attendance {
   updatedAt: string | null
 }
 
-export interface AttendanceForm {
+export interface AttendanceClockInForm {
   clockIn: string
   latitude: string
   longitude: string
 }
 
+export interface AttendanceClockOutForm extends Omit<AttendanceClockInForm, 'clockIn'> {
+  clockOut: string
+}
+
 export type AttendanceResponse = BaseResponse<Attendance>
-export type AttendanceRequest = BaseRequest<AttendanceForm>
+export type AttendanceClockInRequest = BaseRequest<AttendanceClockInForm>
+export type AttendanceClockOutRequest = BaseRequest<AttendanceClockOutForm>

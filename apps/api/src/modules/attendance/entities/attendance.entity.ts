@@ -27,14 +27,6 @@ export class Attendance extends BaseEntityWithTimestamp {
   @Column()
   longitude: string;
 
-  @Column()
-  createdAt: string;
-
-  @Column({
-    nullable: true,
-  })
-  updatedAt?: string | null;
-
   @ManyToOne(() => Staff, (staff) => staff.attendances, { cascade: true })
   @JoinColumn({ name: 'staff_id', referencedColumnName: 'id' })
   staff: Staff;

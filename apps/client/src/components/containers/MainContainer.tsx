@@ -1,5 +1,6 @@
-import clsxm from '@/utils/clsxm'
 import { useRouter } from 'next/router'
+
+import clsxm from '@/utils/clsxm'
 
 import Footer from '../Footer'
 import Header from '../header/Header'
@@ -15,7 +16,7 @@ export default function MainContainer({ className, children, ...props }: MainCon
   return (
     <main
       className={clsxm(
-        'min-h-screen w-full bg px-[4rem] py-[2rem] font-inter text-[12.5px] leading-none tracking-tight text md:px-[14rem]',
+        'min-h-screen w-full bg px-[4rem] py-[2rem] font-inter text-[14px] leading-none tracking-tight text md:px-[14rem]',
         className
       )}
       {...props}

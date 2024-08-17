@@ -1,32 +1,33 @@
+import { titleCase } from '@kotakodelab/lib'
 import { formatTime } from '@kotakodelab/lib/intls'
 import { Fragment, useState } from 'react'
 
-import { useGetAttendanceByStaffQuery, usePostClockInMutation } from '@/services/attendance'
-import type { AttendanceRequest } from '@/types/attendance'
+import { useGetAttendanceByStaffQuery, usePostClockInMutation, usePutClockOutMutation } from '@/services/attendance'
+import type { AttendanceClockInRequest, AttendanceClockOutRequest } from '@/types/attendance'
 import type { ErrorResponse } from '@/types/common'
 import { useGeoLocation } from '@/utils/hooks'
 
+import AttendanceInfo from './AttendanceInfo'
 import AttendanceModal from '../modals/AttendanceModal'
 import ErrorModal from '../modals/ErrorModal'
 import SuccessModal from '../modals/SuccessModal'
-import { Button } from '../ui/Button'
 
 interface AttendanceProps {
   staffId: string
 }
 
 export default function Attendance({ staffId }: AttendanceProps) {
-  const [showClockInModal, setClockOutModal] = useState<boolean>(false)
+  const [showAttendanceModal, setShowAttendanceModal] = useState<boolean>(false)
   const [showErrorModal, setShowErrorModal] = useState<boolean>(false)
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false)
 
   const { currentGeoLocation } = useGeoLocation()
   const { data: staffAttendanceData, refetch: refetchStaffAttendanceData } = useGetAttendanceByStaffQuery({ staffId })
-
   const [doClockIn, { error: clockInError, isSuccess: clockInSuccess }] = usePostClockInMutation()
+  const [doClockOut, { error: clockOutError, isSuccess: clockOutSuccess }] = usePutClockOutMutation()
 
-  const onSubmit = async () => {
-    const { data }: AttendanceRequest = {
+  const onSubmit = async (type?: 'clockIn' | 'clockOut') => {
+    const { data: clockInData }: AttendanceClockInRequest = {
       data: {
         attributes: {
           clockIn: formatTime(),
@@ -36,62 +37,77 @@ export default function Attendance({ staffId }: AttendanceProps) {
       },
     }
 
+    const { data: clockOutData }: AttendanceClockOutRequest = {
+      data: {
+        attributes: {
+          clockOut: formatTime(),
+          latitude: currentGeoLocation?.lat || '',
+          longitude: currentGeoLocation?.long || '',
+        },
+      },
+    }
+
     try {
-      await doClockIn({ data })
+      switch (type) {
+        case 'clockIn':
+          await doClockIn({ data: clockInData })
+          if (typeof clockInError !== 'undefined') {
+            handleShowErrorModal()
+          }
 
-      if (typeof clockInError !== 'undefined') {
-        handleShowErrorModal()
-      }
+          if (typeof clockInSuccess !== 'undefined') {
+            handleShowSuccessModal()
+            refetchStaffAttendanceData()
+          }
+          break
+        case 'clockOut':
+          await doClockOut({ data: clockOutData })
+          if (typeof clockOutError !== 'undefined') {
+            handleShowErrorModal()
+          }
 
-      if (typeof clockInSuccess !== 'undefined') {
-        handleShowSuccessModal()
-        refetchStaffAttendanceData()
+          if (typeof clockOutSuccess !== 'undefined') {
+            handleShowSuccessModal()
+            refetchStaffAttendanceData()
+          }
+          break
+        default:
+          break
       }
     } catch (error) {
       console.log(error)
     }
   }
 
-  const handleShowClockInModal = () => {
-    setClockOutModal(!showClockInModal)
-  }
-
-  const handleShowErrorModal = () => {
-    setClockOutModal(false)
-    setShowErrorModal(!showErrorModal)
-  }
-
-  const handleShowSuccessModal = () => {
-    setClockOutModal(false)
-    setShowSuccessModal(!showSuccessModal)
-  }
-
-  console.log(clockInSuccess)
-
   const checkDataAvailability = staffAttendanceData?.data.filter(
     (item) => item.attributes && 'createdAt' in item.attributes
   )
 
+  const handleShowAttendanceModal = () => {
+    setShowAttendanceModal(!showAttendanceModal)
+  }
+
+  const handleShowErrorModal = () => {
+    setShowAttendanceModal(false)
+    setShowErrorModal(!showErrorModal)
+  }
+
+  const handleShowSuccessModal = () => {
+    setShowAttendanceModal(false)
+    setShowSuccessModal(!showSuccessModal)
+  }
+
   return (
     <Fragment>
-      <div className='h-full max-w-full'>
-        <h3 className='text-[18px] font-bold'>Attendance List</h3>
-        <div className='mt-4 flex gap-3'>
-          {checkDataAvailability && checkDataAvailability.length === 0 ? (
-            <Button
-              className='p-[0.8rem]'
-              onClick={handleShowClockInModal}
-            >
-              Clock In
-            </Button>
-          ) : null}
-        </div>
-      </div>
+      <AttendanceInfo
+        attendanceData={staffAttendanceData}
+        handleShowAttendanceModal={handleShowAttendanceModal}
+      />
       <AttendanceModal
-        visible={showClockInModal}
-        onClose={handleShowClockInModal}
-        onOk={onSubmit}
-        isError={clockInError}
+        visible={showAttendanceModal}
+        onClose={handleShowAttendanceModal}
+        type={checkDataAvailability && checkDataAvailability?.length === 0 ? 'clockIn' : 'clockOut'}
+        handleSubmit={onSubmit}
       />
       <ErrorModal
         visible={showErrorModal}
@@ -103,7 +119,11 @@ export default function Attendance({ staffId }: AttendanceProps) {
         visible={showSuccessModal}
         onClose={handleShowSuccessModal}
         onOk={handleShowSuccessModal}
-        successMsg='Clock In Successful'
+        successMsg={
+          checkDataAvailability && !checkDataAvailability[0]?.attributes.clockOut
+            ? titleCase('clock in succesful', true)
+            : titleCase('clock out successful', true)
+        }
       />
     </Fragment>
   )

@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { HYDRATE } from 'next-redux-wrapper'
 
-import type { AttendanceRequest, AttendanceResponse } from '@/types/attendance'
+import type { AttendanceClockInRequest, AttendanceClockOutRequest, AttendanceResponse } from '@/types/attendance'
 import { apiBaseQuery } from '@/utils/api'
 
 const attendanceApi = createApi({
@@ -9,7 +9,7 @@ const attendanceApi = createApi({
   baseQuery: apiBaseQuery,
   tagTypes: ['Attendance'],
   refetchOnMountOrArgChange: true,
-  keepUnusedDataFor: 259200, // 3 days
+  keepUnusedDataFor: 259200,
   endpoints: (builder) => ({
     getAttendanceByStaff: builder.query<AttendanceResponse, { staffId: string }>({
       query: ({ staffId }) => ({
@@ -17,21 +17,21 @@ const attendanceApi = createApi({
         method: 'GET',
       }),
     }),
-    postClockIn: builder.mutation<AttendanceResponse, AttendanceRequest>({
+    postClockIn: builder.mutation<AttendanceResponse, AttendanceClockInRequest>({
       query: (data) => ({
         url: '/attendance',
         method: 'POST',
         body: data,
       }),
       invalidatesTags: ['Attendance'],
-      // async onQueryStarted(data, { dispatch, queryFulfilled }) {
-      //   try {
-      //     await queryFulfilled
-      //     dispatch(attendanceApi.util.invalidateTags([{ type: 'Attendance' }]))
-      //   } catch (error) {
-      //     console.error('Failed to clock in:', error)
-      //   }
-      // },
+    }),
+    putClockOut: builder.mutation<AttendanceResponse, AttendanceClockOutRequest>({
+      query: (data) => ({
+        url: '/attendance',
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: ['Attendance'],
     }),
   }),
   extractRehydrationInfo(action, { reducerPath }) {
@@ -42,6 +42,6 @@ const attendanceApi = createApi({
 })
 
 // Export hooks for usage in functional components
-export const { useGetAttendanceByStaffQuery, usePostClockInMutation } = attendanceApi
+export const { useGetAttendanceByStaffQuery, usePostClockInMutation, usePutClockOutMutation } = attendanceApi
 
 export default attendanceApi

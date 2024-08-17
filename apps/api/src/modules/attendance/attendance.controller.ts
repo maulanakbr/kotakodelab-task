@@ -34,18 +34,18 @@ export class AttendanceController {
     return { data: attendance };
   }
 
-  @Put(':attendanceId')
+  @Put()
   @Role(AuthEntityTypeEnum.STAFF)
   @UseGuards(JwtAuthGuard, RoleGuard)
   async clockOut(
-    @Param('attendanceId') attendanceId: string,
+    // @Param('attendanceId') attendanceId: string,
     @CurrentUser() user: IStaff,
     @Body() options: AttendanceClockOutDto,
   ) {
     const attendance = await this.attendanceService.clockOut(
       options,
       user,
-      attendanceId,
+      // attendanceId,
     );
     return { data: attendance };
   }

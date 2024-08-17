@@ -1,21 +1,20 @@
-import type { SerializedError } from '@reduxjs/toolkit'
-import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import React from 'react'
 
 import Modal, { type ModalProps } from '../ui/Modal'
 
-interface AttendanceModalProps extends Omit<ModalProps, 'children' | 'okTitle'> {
-  isError?: FetchBaseQueryError | SerializedError
+interface AttendanceModalProps extends Omit<ModalProps, 'children' | 'okTitle' | 'onOk'> {
+  type: 'clockIn' | 'clockOut'
+  handleSubmit: (type: 'clockIn' | 'clockOut') => void
 }
 
-export default function AttendanceModal({ visible, onClose, onOk }: AttendanceModalProps) {
+export default function AttendanceModal({ visible, onClose, type, handleSubmit }: AttendanceModalProps) {
   return (
     <Modal
       visible={visible}
       onClose={onClose}
-      onOk={onOk}
+      onOk={() => handleSubmit(type)}
     >
-      <p>Are you sure to clock in?</p>
+      <p>{type === 'clockIn' ? 'Are you sure to clock in?' : 'Are you sure to clock out?'}</p>
     </Modal>
   )
 }

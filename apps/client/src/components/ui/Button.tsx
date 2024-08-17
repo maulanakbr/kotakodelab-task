@@ -12,7 +12,7 @@ const buttonVariants = cva(
         alternative: 'border-2 border-inverted bg-emphasis text hover:bg-inverted hover:text-white disabled:bg-muted',
       },
       size: {
-        default: 'rounded-[17px] p-2',
+        default: 'rounded-md px-3 py-2',
       },
     },
     defaultVariants: {

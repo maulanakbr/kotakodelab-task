@@ -16,6 +16,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CompanyService } from '../company/company.service';
 import type { IStaff } from '../staff/entities/staff.entity';
 import { compareLocation } from 'src/helpers/compare-loc';
+import { Between } from 'typeorm';
 
 @Injectable()
 export class AttendanceService {
@@ -30,11 +31,8 @@ export class AttendanceService {
     options: AttendanceClockInDto,
     user: IStaff,
   ): Promise<Attendance> {
-    const findAttendance = await this.findByStaffId(user.id);
-
-    console.log('findAttendance', findAttendance);
-
-    if (findAttendance !== null) AttendanceAlreadyFulfilledError();
+    const existingAttendance = await this.findByStaffId(user.id);
+    if (existingAttendance) AttendanceAlreadyFulfilledError();
 
     const findCompany = await this.companyService.findOne(user.companyId);
     const compareResult = compareLocation({
@@ -43,7 +41,6 @@ export class AttendanceService {
       targetLatitude: findCompany.latitude,
       targetLongitude: findCompany.longitude,
     });
-
     if (!compareResult) LocationNotMatchError();
 
     const findStaff = this.staffService.findOne({ id: user.id });
@@ -54,7 +51,6 @@ export class AttendanceService {
       if (user) {
         attendance.staffId = user.id;
       }
-
       attendance[key] = options[key];
     });
 
@@ -65,31 +61,38 @@ export class AttendanceService {
   async clockOut(
     options: AttendanceClockOutDto,
     user: IStaff,
-    attendanceId: string,
   ): Promise<Attendance> {
-    const attendance = await this.attendanceRepository.findOne({
-      where: { id: attendanceId },
+    const existingAttendance = await this.findByStaffId(user.id);
+    if (!existingAttendance) NoAttendanceRecordFoundError();
+    if (existingAttendance.updatedAt) AttendanceAlreadyFulfilledError();
+
+    const findCompany = await this.companyService.findOne(user.companyId);
+    const compareResult = compareLocation({
+      reqLatitude: options.latitude,
+      reqLongitude: options.longitude,
+      targetLatitude: findCompany.latitude,
+      targetLongitude: findCompany.longitude,
     });
-    if (!attendance) NoAttendanceRecordFoundError();
-    if (attendance.updatedAt) AttendanceAlreadyFulfilledError();
-    if (
-      options.latitude !== attendance.latitude ||
-      options.longitude !== attendance.longitude
-    )
-      LocationNotMatchError();
+    if (!compareResult) LocationNotMatchError();
 
     const findStaff = this.staffService.findOne({ id: user.id });
     if (!findStaff) NoStaffFoundError();
 
-    attendance.clockOut = options.clockOut;
+    existingAttendance.clockOut = options.clockOut;
 
-    await attendance.save();
-    return attendance;
+    await existingAttendance.save();
+    return existingAttendance;
   }
 
   async findByStaffId(staffId: string): Promise<Attendance> {
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0);
+
+    const endOfDay = new Date();
+    endOfDay.setHours(23, 59, 59, 999);
+
     const attendance = await this.attendanceRepository.findOne({
-      where: { staffId, createdAt: String(new Date()) },
+      where: { staffId, createdAt: Between(startOfDay, endOfDay) },
     });
 
     return attendance;
