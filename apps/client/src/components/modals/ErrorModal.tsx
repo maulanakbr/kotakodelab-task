@@ -18,9 +18,9 @@ export default function ErrorModal({ visible, onClose, onOk, errorMsg }: ErrorMo
       okTitle='Back'
       cancelButtonProps={{ style: { display: 'none' } }}
     >
-      <div className='flex flex-col items-center justify-center gap-2'>
+      <div className='flex flex-col items-center justify-center gap-4 p-12'>
         <Icons.CloseIcon
-          size={80}
+          size={120}
           className='rounded-full bg-error p-2 text-dark-error'
         />
         <h3 className='text-left font-poppins text-[42px] font-bold leading-[3.5rem] text-emphasis'>Ooops</h3>
