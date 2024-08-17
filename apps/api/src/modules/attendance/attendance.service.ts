@@ -15,6 +15,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CompanyService } from '../company/company.service';
 import type { IStaff } from '../staff/entities/staff.entity';
+import { compareLocation } from 'src/helpers/compare-loc';
 
 @Injectable()
 export class AttendanceService {
@@ -31,14 +32,19 @@ export class AttendanceService {
   ): Promise<Attendance> {
     const findAttendance = await this.findByStaffId(user.id);
 
-    if (findAttendance) AttendanceAlreadyFulfilledError();
+    console.log('findAttendance', findAttendance);
+
+    if (findAttendance !== null) AttendanceAlreadyFulfilledError();
 
     const findCompany = await this.companyService.findOne(user.companyId);
-    if (
-      options.latitude !== findCompany.latitude ||
-      options.longitude !== findCompany.longitude
-    )
-      LocationNotMatchError();
+    const compareResult = compareLocation({
+      reqLatitude: options.latitude,
+      reqLongitude: options.longitude,
+      targetLatitude: findCompany.latitude,
+      targetLongitude: findCompany.longitude,
+    });
+
+    if (!compareResult) LocationNotMatchError();
 
     const findStaff = this.staffService.findOne({ id: user.id });
     if (!findStaff) NoStaffFoundError();

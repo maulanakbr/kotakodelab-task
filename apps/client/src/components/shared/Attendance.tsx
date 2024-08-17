@@ -8,6 +8,7 @@ import { useGeoLocation } from '@/utils/hooks'
 
 import AttendanceModal from '../modals/AttendanceModal'
 import ErrorModal from '../modals/ErrorModal'
+import SuccessModal from '../modals/SuccessModal'
 import { Button } from '../ui/Button'
 
 interface AttendanceProps {
@@ -17,11 +18,12 @@ interface AttendanceProps {
 export default function Attendance({ staffId }: AttendanceProps) {
   const [showClockInModal, setClockOutModal] = useState<boolean>(false)
   const [showErrorModal, setShowErrorModal] = useState<boolean>(false)
+  const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false)
 
   const { currentGeoLocation } = useGeoLocation()
-  const { data: staffAttendanceData } = useGetAttendanceByStaffQuery({ staffId })
+  const { data: staffAttendanceData, refetch: refetchStaffAttendanceData } = useGetAttendanceByStaffQuery({ staffId })
 
-  const [doClockIn, { error: clockInError }] = usePostClockInMutation()
+  const [doClockIn, { error: clockInError, isSuccess: clockInSuccess }] = usePostClockInMutation()
 
   const onSubmit = async () => {
     const { data }: AttendanceRequest = {
@@ -36,7 +38,15 @@ export default function Attendance({ staffId }: AttendanceProps) {
 
     try {
       await doClockIn({ data })
-      handleShowErrorModal()
+
+      if (typeof clockInError !== 'undefined') {
+        handleShowErrorModal()
+      }
+
+      if (typeof clockInSuccess !== 'undefined') {
+        handleShowSuccessModal()
+        refetchStaffAttendanceData()
+      }
     } catch (error) {
       console.log(error)
     }
@@ -47,11 +57,16 @@ export default function Attendance({ staffId }: AttendanceProps) {
   }
 
   const handleShowErrorModal = () => {
-    if (clockInError) {
-      setClockOutModal(false)
-      setShowErrorModal(!showErrorModal)
-    }
+    setClockOutModal(false)
+    setShowErrorModal(!showErrorModal)
   }
+
+  const handleShowSuccessModal = () => {
+    setClockOutModal(false)
+    setShowSuccessModal(!showSuccessModal)
+  }
+
+  console.log(clockInSuccess)
 
   const checkDataAvailability = staffAttendanceData?.data.filter(
     (item) => item.attributes && 'createdAt' in item.attributes
@@ -83,6 +98,12 @@ export default function Attendance({ staffId }: AttendanceProps) {
         onClose={handleShowErrorModal}
         onOk={handleShowErrorModal}
         errorMsg={clockInError as ErrorResponse}
+      />
+      <SuccessModal
+        visible={showSuccessModal}
+        onClose={handleShowSuccessModal}
+        onOk={handleShowSuccessModal}
+        successMsg='Clock In Successful'
       />
     </Fragment>
   )

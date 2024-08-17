@@ -1,8 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { HYDRATE } from 'next-redux-wrapper'
 
-import { apiBaseQuery } from '@/utils/api'
 import type { AttendanceRequest, AttendanceResponse } from '@/types/attendance'
+import { apiBaseQuery } from '@/utils/api'
 
 const attendanceApi = createApi({
   reducerPath: 'attendanceApi',
@@ -24,6 +24,14 @@ const attendanceApi = createApi({
         body: data,
       }),
       invalidatesTags: ['Attendance'],
+      // async onQueryStarted(data, { dispatch, queryFulfilled }) {
+      //   try {
+      //     await queryFulfilled
+      //     dispatch(attendanceApi.util.invalidateTags([{ type: 'Attendance' }]))
+      //   } catch (error) {
+      //     console.error('Failed to clock in:', error)
+      //   }
+      // },
     }),
   }),
   extractRehydrationInfo(action, { reducerPath }) {

@@ -19,7 +19,7 @@ export default function ErrorModal({ visible, onClose, onOk, errorMsg }: ErrorMo
       cancelButtonProps={{ style: { display: 'none' } }}
     >
       <div className='flex flex-col items-center justify-center gap-4 p-12'>
-        <Icons.CloseIcon
+        <Icons.Close
           size={120}
           className='rounded-full bg-error p-2 text-dark-error'
         />

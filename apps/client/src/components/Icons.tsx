@@ -1,5 +1,6 @@
-import { type LucideProps, X } from 'lucide-react'
+import { type LucideProps, CheckCheck, X } from 'lucide-react'
 
 export const Icons = {
-  CloseIcon: (props: LucideProps) => <X {...props} />,
+  Close: (props: LucideProps) => <X {...props} />,
+  Check: (props: LucideProps) => <CheckCheck {...props} />,
 }
