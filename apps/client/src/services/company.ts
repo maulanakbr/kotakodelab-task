@@ -1,8 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { HYDRATE } from 'next-redux-wrapper'
 
-import { apiBaseQuery } from '@/utils/api'
 import type { CompanyResponse } from '@/types/company'
+import { apiBaseQuery } from '@/utils/api'
 
 const companyApi = createApi({
   reducerPath: 'companyApi',

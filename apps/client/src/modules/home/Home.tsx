@@ -13,6 +13,7 @@ export default function Home() {
       companyId={companyId as string}
       userRole={role as RoleValues}
       username={username as string}
+      staffId={id as string}
     >
       <Attendance staffId={id as string} />
     </Shell>

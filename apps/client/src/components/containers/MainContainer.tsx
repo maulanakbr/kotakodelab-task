@@ -16,7 +16,9 @@ export default function MainContainer({ className, children, ...props }: MainCon
   return (
     <main
       className={clsxm(
-        'min-h-screen w-full bg px-[4rem] py-[2rem] font-inter text-[14px] leading-none tracking-tight text md:px-[14rem]',
+        pathname !== '/login'
+          ? 'min-h-screen w-full bg px-[4rem] py-[2rem] font-inter text-[14px] leading-none tracking-tight text md:px-[14rem]'
+          : 'px-0 py-0',
         className
       )}
       {...props}

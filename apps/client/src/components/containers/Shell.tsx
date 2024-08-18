@@ -9,6 +9,7 @@ interface ShellProps extends React.HTMLAttributes<HTMLDivElement> {
   companyId: string
   userRole: RoleValues
   username: string
+  staffId: string
 }
 
 type LayoutValues = typeof SuperAdminLayout | typeof AdminLayout | typeof StaffLayout
@@ -19,7 +20,7 @@ const layoutOptions: Record<RoleValues, LayoutValues> = {
   [ROLES['STAFF']]: StaffLayout,
 }
 
-export default function Shell({ children, companyId, userRole, username, ...props }: ShellProps) {
+export default function Shell({ children, companyId, userRole, username, staffId, ...props }: ShellProps) {
   const Layout = layoutOptions[userRole] || StaffLayout
 
   return (
@@ -27,6 +28,7 @@ export default function Shell({ children, companyId, userRole, username, ...prop
       userRole={userRole}
       companyId={companyId}
       username={username}
+      staffId={staffId}
       {...props}
     >
       {children}

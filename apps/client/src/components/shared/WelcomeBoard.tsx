@@ -4,7 +4,7 @@ import { Fragment, useState } from 'react'
 import clsxm from '@/utils/clsxm'
 
 import { Icons } from '../Icons'
-import StaffModal from '../modals/StaffModal'
+import StaffFormModal from '../modals/StaffFormModal'
 
 interface WelcomeBoardProps {
   className?: string
@@ -25,7 +25,7 @@ export default function WelcomeBoard({ className, username, userRole }: WelcomeB
     <Fragment>
       <div
         className={clsxm(
-          'relative flex h-full max-w-full flex-col items-center justify-center rounded-[18px] bg-emphasis px-8 shadow-md',
+          'relative flex h-full max-w-full flex-col items-center justify-center overflow-hidden rounded-[18px] bg-emphasis shadow-md',
           className
         )}
       >
@@ -38,7 +38,7 @@ export default function WelcomeBoard({ className, username, userRole }: WelcomeB
         <h3 className='font-poppins text-[42px] font-bold leading-[3rem] text-emphasis'>Hi, {username}</h3>
         <p className='text-[14px]'>{titleCase(currentRole?.toLowerCase())}</p>
       </div>
-      <StaffModal
+      <StaffFormModal
         title='Edit Staff'
         visible={showUpdateStaffModal}
         onClose={handleShowUpdateStaffModal}

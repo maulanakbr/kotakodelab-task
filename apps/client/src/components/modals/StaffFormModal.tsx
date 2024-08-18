@@ -4,11 +4,11 @@ import type { Staff, StaffUpdateForm, StaffUpdateRequest } from '@/types/staff'
 import StaffForm from '../forms/StaffForm'
 import Modal, { type ModalProps } from '../ui/Modal'
 
-interface StaffModalProps extends Omit<ModalProps, 'children' | 'okTitle' | 'onOk'> {
+interface StaffFormModalProps extends Omit<ModalProps, 'children' | 'okTitle' | 'onOk'> {
   data?: Pick<Staff, 'username'>
 }
 
-export default function StaffModal({ title, visible, onClose, data }: StaffModalProps) {
+export default function StaffFormModal({ title, visible, onClose, data }: StaffFormModalProps) {
   const [doUpdateStaff, { isSuccess: successUpdateStaff }] = usePutStaffMutation()
 
   const onSubmit = async (staffForm: StaffUpdateForm) => {

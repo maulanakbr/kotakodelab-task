@@ -62,7 +62,7 @@ export default function Modal({
                 {title && (
                   <Dialog.Title
                     as='h3'
-                    className='text-lg font-medium leading-6'
+                    className='text-lg font-semibold leading-6'
                   >
                     {title}
                   </Dialog.Title>

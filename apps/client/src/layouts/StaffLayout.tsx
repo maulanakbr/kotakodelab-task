@@ -10,9 +10,10 @@ export interface StaffLayoutProps extends React.HTMLAttributes<HTMLElement> {
   companyId: string
   userRole: RoleValues
   username: string
+  staffId: string
 }
 
-export default function StaffLayout({ children, companyId, userRole, username, ...props }: StaffLayoutProps) {
+export default function StaffLayout({ children, companyId, userRole, username, staffId, ...props }: StaffLayoutProps) {
   return (
     <section
       className='flex max-h-screen w-full flex-col gap-12'
@@ -31,7 +32,10 @@ export default function StaffLayout({ children, companyId, userRole, username, .
         />
       </div>
       <div className='min-h-72 grow'>{children}</div>
-      <MutualStaff companyId={companyId} />
+      <MutualStaff
+        companyId={companyId}
+        staffId={staffId}
+      />
     </section>
   )
 }
