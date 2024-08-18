@@ -22,6 +22,7 @@ export default function Attendance({ staffId }: AttendanceProps) {
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false)
 
   const { currentGeoLocation } = useGeoLocation()
+
   const { data: staffAttendanceData, refetch: refetchStaffAttendanceData } = useGetAttendanceByStaffQuery({ staffId })
   const [doClockIn, { error: clockInError, isSuccess: clockInSuccess }] = usePostClockInMutation()
   const [doClockOut, { error: clockOutError, isSuccess: clockOutSuccess }] = usePutClockOutMutation()
@@ -75,7 +76,7 @@ export default function Attendance({ staffId }: AttendanceProps) {
           break
       }
     } catch (error) {
-      console.log(error)
+      throw new Error('Something happen')
     }
   }
 

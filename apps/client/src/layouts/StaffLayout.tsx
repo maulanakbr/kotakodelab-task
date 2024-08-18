@@ -6,21 +6,13 @@ import MutualStaff from '@/components/shared/MutualStaff'
 import WelcomeBoard from '@/components/shared/WelcomeBoard'
 
 export interface StaffLayoutProps extends React.HTMLAttributes<HTMLElement> {
-  className?: string
   children: React.ReactNode
   companyId: string
   userRole: RoleValues
   username: string
 }
 
-export default function StaffLayout({
-  className,
-  children,
-  companyId,
-  userRole,
-  username,
-  ...props
-}: StaffLayoutProps) {
+export default function StaffLayout({ children, companyId, userRole, username, ...props }: StaffLayoutProps) {
   return (
     <section
       className='flex max-h-screen w-full flex-col gap-12'

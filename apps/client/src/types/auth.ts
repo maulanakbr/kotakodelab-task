@@ -5,7 +5,6 @@ import { BaseRequest, BaseResponse } from './common'
 export interface Auth {
   ownerUser: {
     id: string
-    // staffId: string
     firstName: string
     lastName: string
     email: string
@@ -24,5 +23,10 @@ export interface AuthForm {
   password: string
 }
 
+export interface LogoutForm {
+  id: string
+}
+
 export type AuthResponse = BaseResponse<Auth>
 export type AuthRequest = BaseRequest<AuthForm>
+export type LogoutRequest = BaseRequest<LogoutForm>

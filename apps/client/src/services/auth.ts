@@ -2,7 +2,7 @@ import { createSlice, isAnyOf } from '@reduxjs/toolkit'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { HYDRATE } from 'next-redux-wrapper'
 
-import { Auth, AuthRequest, AuthResponse } from '@/types/auth'
+import { Auth, AuthRequest, AuthResponse, LogoutRequest } from '@/types/auth'
 import { apiBaseQuery } from '@/utils/api'
 
 const initialState: Record<keyof Auth['ownerUser'], Auth['ownerUser'][keyof Auth['ownerUser']] | undefined> = {
@@ -30,10 +30,11 @@ const authApi = createApi({
       }),
       invalidatesTags: ['Auth'],
     }),
-    postLogout: builder.mutation<AuthResponse, AuthRequest>({
-      query: () => ({
+    postLogout: builder.mutation<AuthResponse, LogoutRequest>({
+      query: (data) => ({
         url: '/auth/logout',
         method: 'POST',
+        body: data,
       }),
       invalidatesTags: ['Auth'],
     }),
@@ -68,6 +69,6 @@ const slice = createSlice({
 export const authSlice = slice
 
 // Export hooks for usage in functional components
-export const { usePostLoginMutation } = authApi
+export const { usePostLoginMutation, usePostLogoutMutation } = authApi
 
 export default authApi
