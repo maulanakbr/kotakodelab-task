@@ -25,7 +25,7 @@ export default function StaffForm({ data, onSubmit, formId }: StaffFormProps) {
       className='w-full'
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div>
+      <div className='flex flex-col space-y-2'>
         <Label>Username</Label>
         <Input
           {...register('username', { required: 'Username is required!' })}

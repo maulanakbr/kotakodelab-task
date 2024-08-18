@@ -1,7 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { HYDRATE } from 'next-redux-wrapper'
 
-import { StaffBrowseRequest, StaffBrowseResponse, StaffDetailResponse, StaffUpdateRequest } from '@/types/staff'
+import {
+  StaffBrowseRequest,
+  StaffBrowseResponse,
+  StaffCreateRequest,
+  StaffDetailResponse,
+  StaffUpdateRequest,
+} from '@/types/staff'
 import { apiBaseQuery } from '@/utils/api'
 
 const staffApi = createApi({
@@ -24,6 +30,14 @@ const staffApi = createApi({
       }),
       providesTags: ['Staff'],
     }),
+    postStaff: builder.mutation<StaffBrowseResponse, StaffCreateRequest>({
+      query: (data) => ({
+        url: '/staffs',
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['Staff'],
+    }),
     putStaff: builder.mutation<StaffBrowseResponse, StaffUpdateRequest>({
       query: (data) => ({
         url: '/staffs',
@@ -41,6 +55,12 @@ const staffApi = createApi({
 })
 
 // Export hooks for usage in functional components
-export const { useGetListStaffsQuery, useGetDetailStaffQuery, usePutStaffMutation, util: exampleUtil } = staffApi
+export const {
+  useGetListStaffsQuery,
+  useGetDetailStaffQuery,
+  usePostStaffMutation,
+  usePutStaffMutation,
+  util: exampleUtil,
+} = staffApi
 
 export default staffApi

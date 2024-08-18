@@ -1,4 +1,4 @@
-import type { RoleValues } from '@kotakodelab/lib'
+import { type RoleValues, ROLES } from '@kotakodelab/lib'
 import * as React from 'react'
 
 import Shell from '@/components/containers/Shell'
@@ -15,7 +15,7 @@ export default function Home() {
       username={username as string}
       staffId={id as string}
     >
-      <Attendance staffId={id as string} />
+      {ROLES['SUPERADMIN'] !== role && <Attendance staffId={id as string} />}
     </Shell>
   )
 }

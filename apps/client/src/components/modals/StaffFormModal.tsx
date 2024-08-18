@@ -1,17 +1,55 @@
-import { usePutStaffMutation } from '@/services/staffs'
-import type { Staff, StaffUpdateForm, StaffUpdateRequest } from '@/types/staff'
+import { Fragment, useState } from 'react'
 
+import { usePostStaffMutation, usePutStaffMutation } from '@/services/staffs'
+import type { ErrorResponse } from '@/types/common'
+import type {
+  Staff,
+  StaffCreateRequest,
+  StaffForm as StaffFormType,
+  StaffUpdateForm,
+  StaffUpdateRequest,
+} from '@/types/staff'
+
+import ErrorModal from './ErrorModal'
+import SuccessModal from './SuccessModal'
+import CreateStaffForm from '../forms/CreateStaffForm'
 import StaffForm from '../forms/StaffForm'
 import Modal, { type ModalProps } from '../ui/Modal'
 
 interface StaffFormModalProps extends Omit<ModalProps, 'children' | 'okTitle' | 'onOk'> {
   data?: Pick<Staff, 'username'>
+  type?: 'create' | 'update'
 }
 
-export default function StaffFormModal({ title, visible, onClose, data }: StaffFormModalProps) {
+export default function StaffFormModal({ title, visible, onClose, data, type = 'update' }: StaffFormModalProps) {
+  const [showErrorModal, setShowErrorModal] = useState<boolean>(false)
+  const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false)
+
+  const [doCreateStaff, { isSuccess: successCreateStaff, error: errorCreateStaff }] = usePostStaffMutation()
   const [doUpdateStaff, { isSuccess: successUpdateStaff }] = usePutStaffMutation()
 
-  const onSubmit = async (staffForm: StaffUpdateForm) => {
+  const onSubmitCreate = async (staffForm: StaffFormType) => {
+    const payload: StaffCreateRequest = {
+      data: {
+        attributes: { ...staffForm },
+      },
+    }
+
+    try {
+      await doCreateStaff(payload)
+      if (typeof errorCreateStaff !== 'undefined') {
+        handleShowErrorModal()
+      }
+
+      if (typeof successCreateStaff !== 'undefined') {
+        handleShowSuccessModal()
+      }
+    } catch (error) {
+      throw new Error('Failed to create staff')
+    }
+  }
+
+  const onSubmitUpdate = async (staffForm: StaffUpdateForm) => {
     const payload: StaffUpdateRequest = {
       data: {
         attributes: { ...staffForm },
@@ -28,18 +66,51 @@ export default function StaffFormModal({ title, visible, onClose, data }: StaffF
     }
   }
 
+  const handleShowErrorModal = () => {
+    onClose()
+    setShowErrorModal(!showErrorModal)
+  }
+
+  const handleShowSuccessModal = () => {
+    onClose()
+    setShowSuccessModal(!showSuccessModal)
+  }
+
   return (
-    <Modal
-      title={title}
-      visible={visible}
-      onClose={onClose}
-      okButtonProps={{ type: 'submit', form: 'staff-form' }}
-    >
-      <StaffForm
-        onSubmit={onSubmit}
-        formId='staff-form'
-        data={{ username: data?.username as string }}
+    <Fragment>
+      <Modal
+        title={title}
+        visible={visible}
+        onClose={onClose}
+        okButtonProps={
+          type === 'update' ? { type: 'submit', form: 'update-form' } : { type: 'submit', form: 'create-form' }
+        }
+      >
+        {type !== 'update' ? (
+          <CreateStaffForm
+            onSubmit={onSubmitCreate}
+            formId='create-form'
+          />
+        ) : (
+          <StaffForm
+            onSubmit={onSubmitUpdate}
+            formId='update-form'
+            data={{ username: data?.username as string }}
+          />
+        )}
+      </Modal>
+      <ErrorModal
+        visible={showErrorModal}
+        onClose={handleShowErrorModal}
+        onOk={handleShowErrorModal}
+        errorMsg={errorCreateStaff as ErrorResponse}
       />
-    </Modal>
+      <SuccessModal
+        visible={showSuccessModal}
+        onClose={handleShowSuccessModal}
+        onOk={handleShowSuccessModal}
+        successMsg='Create Company Successfully'
+      />
+    </Fragment>
   )
 }

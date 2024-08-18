@@ -22,6 +22,9 @@ export type StaffUpdateForm = {
   username: string
 }
 
+export type StaffForm = { password: string } & Omit<Staff, 'id'>
+
 export type StaffBrowseResponse = BaseResponse<Staff>
 export type StaffDetailResponse = BaseResponse<Staff>
+export type StaffCreateRequest = BaseRequest<StaffForm>
 export type StaffUpdateRequest = BaseRequest<StaffUpdateForm>

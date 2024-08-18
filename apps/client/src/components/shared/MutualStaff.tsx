@@ -35,10 +35,10 @@ export default function MutualStaff({ companyId, staffId }: MutualStaffProps) {
             .map((staff) => (
               <span
                 key={staff.id}
-                className='flex size-12 cursor-pointer items-center justify-center rounded-full bg-inverted text-center font-semibold text-white shadow-md'
+                className='flex size-12 cursor-pointer items-center justify-center rounded-full bg-inverted text-center font-semibold text-white shadow-md hover:bg-emphasis hover:text-emphasis'
                 onClick={() => handleShowMutualStaffModal(staff)}
               >
-                <p>{`${staff.firstName[0]}${staff.lastName[0]}`}</p>
+                <p>{`${staff.firstName[0].toUpperCase()}${staff.lastName[0].toUpperCase()}`}</p>
               </span>
             ))}
         </div>
