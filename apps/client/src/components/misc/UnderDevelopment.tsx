@@ -73,8 +73,8 @@ export default function UnderDevelopment({ className }: UnderDevelopmentProps) {
   return (
     <Fragment>
       <div className={clsxm('flex w-full flex-col items-center justify-center space-y-10', className)}>
-        <Icons.SearchX
-          size={60}
+        <Icons.Hammer
+          size={140}
           className='rounded-full bg-error p-3 text-dark-error'
         />
         <h3 className='text-[18px] font-semibold leading-5 tracking-normal'>Page is still under development</h3>

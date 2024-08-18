@@ -1,10 +1,12 @@
 import { ROLES } from '@kotakodelab/lib'
 import { useForm } from 'react-hook-form'
 
+import { useGetAllCompaniesQuery } from '@/services/company'
 import type { StaffForm } from '@/types/staff' // Assuming StaffForm is `Omit<Staff, 'id'>`
 
 import { Input } from '../ui/Input'
 import { Label } from '../ui/Label'
+import { Select } from '../ui/Select'
 
 interface StaffFormProps {
   onSubmit: (form: StaffForm) => void
@@ -12,6 +14,8 @@ interface StaffFormProps {
 }
 
 export default function CreateStaffForm({ onSubmit, formId }: StaffFormProps) {
+  const { data: companies } = useGetAllCompaniesQuery()
+
   const { register, handleSubmit } = useForm<StaffForm>({
     mode: 'onChange',
   })
@@ -67,16 +71,26 @@ export default function CreateStaffForm({ onSubmit, formId }: StaffFormProps) {
         />
       </div>
       <div className='flex flex-col space-y-2'>
-        <Label>Company ID</Label>
-        <Input
+        <Label>Company</Label>
+        <Select
           {...register('companyId', { required: 'Company ID is required!' })}
-          id='companyId'
-          type='text'
-        />
+          id='role'
+          className='rounded border border-solid border-subtle px-2.5 py-3 focus:border-subtle focus:ring-transparent'
+        >
+          {companies &&
+            companies?.data.map((item) => (
+              <option
+                key={item?.attributes.id}
+                value={item?.attributes.id}
+              >
+                {item?.attributes.name}
+              </option>
+            ))}
+        </Select>
       </div>
       <div className='flex flex-col space-y-2'>
         <Label>Role</Label>
-        <select
+        <Select
           {...register('role', { required: 'Role is required!', valueAsNumber: true })}
           id='role'
           className='rounded border border-solid border-subtle px-2.5 py-3 focus:border-subtle focus:ring-transparent'
@@ -89,7 +103,7 @@ export default function CreateStaffForm({ onSubmit, formId }: StaffFormProps) {
               {key}
             </option>
           ))}
-        </select>
+        </Select>
       </div>
     </form>
   )

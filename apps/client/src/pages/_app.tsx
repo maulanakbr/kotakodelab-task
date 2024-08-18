@@ -7,11 +7,11 @@ import { I18nextProvider } from 'react-i18next'
 
 import '@/styles/theme.css'
 
+import MainContainer from '@/components/containers/MainContainer'
 import Loading from '@/components/Loading'
 import i18n from '@/config/i18n'
 import CheckingUserToken from '@/layouts/CheckingUserToken'
 import { wrapper } from '@/store'
-import MainContainer from '@/components/containers/MainContainer'
 
 const MyApp: React.FC<AppProps> = (props) => {
   const { Component, pageProps } = props

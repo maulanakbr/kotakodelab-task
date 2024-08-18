@@ -17,6 +17,12 @@ const companyApi = createApi({
         method: 'GET',
       }),
     }),
+    getAllCompanies: builder.query<CompanyResponse, void>({
+      query: () => ({
+        url: '/companies',
+        method: 'GET',
+      }),
+    }),
     postCompany: builder.mutation<CompanyResponse, CompanyRequest>({
       query: (data) => ({
         url: '/companies',
@@ -34,6 +40,6 @@ const companyApi = createApi({
 })
 
 // Export hooks for usage in functional components
-export const { useGetCompanyQuery, usePostCompanyMutation } = companyApi
+export const { useGetCompanyQuery, usePostCompanyMutation, useGetAllCompaniesQuery } = companyApi
 
 export default companyApi

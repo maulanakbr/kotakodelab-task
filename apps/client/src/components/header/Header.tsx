@@ -1,4 +1,5 @@
 import { deleteCookie } from 'cookies-next'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
@@ -13,10 +14,13 @@ export default function Header() {
   const router = useRouter()
   const { id } = useAppSelector((state) => state.auth)
 
-  const [doLogout, { isSuccess: logoutSuccess }] = usePostLogoutMutation()
+  const [doLogout, { isSuccess: logoutSuccess, isLoading: isLoggingOut, isError: logoutError }] =
+    usePostLogoutMutation()
 
   const onSubmit = async () => {
-    const { data }: LogoutRequest = {
+    if (!id) return
+
+    const payload: LogoutRequest = {
       data: {
         attributes: {
           id: id as string,
@@ -25,9 +29,9 @@ export default function Header() {
     }
 
     try {
-      await doLogout({ data })
+      await doLogout(payload).unwrap()
     } catch (error) {
-      throw new Error('Something happen')
+      throw new Error('Logout failed:')
     }
   }
 
@@ -36,17 +40,32 @@ export default function Header() {
       deleteCookie(USER_ACCESS_TOKEN)
       router.push('/login')
     }
-  }, [logoutSuccess])
+  }, [logoutSuccess, router])
 
   return (
-    <header className='mb-4 inline-flex h-12 w-full items-center text-[16px]'>
-      <nav className='w-full'>
-        <ul className='w-full text-right font-bold'>
-          <li>
-            <Button onClick={onSubmit}>Logout</Button>
-          </li>
-        </ul>
+    <header className='mb-4 flex h-16 w-full'>
+      <nav className='container mx-auto flex items-center justify-between'>
+        <div>
+          <Image
+            src='/logo.png'
+            alt='Company Logo'
+            width={100}
+            height={100}
+            priority
+          />
+        </div>
+
+        <div>
+          <Button
+            onClick={onSubmit}
+            disabled={isLoggingOut}
+            className='text-sm font-semibold'
+          >
+            {isLoggingOut ? 'Logging out...' : 'Logout'}
+          </Button>
+        </div>
       </nav>
+      {logoutError && <p className='mt-2 text-center text-red-500'>Something went wrong. Please try again.</p>}
     </header>
   )
 }

@@ -25,7 +25,7 @@ export default function WelcomeBoard({ className, username, userRole }: WelcomeB
     <Fragment>
       <div
         className={clsxm(
-          'relative flex h-full max-w-full flex-col items-center justify-center overflow-hidden rounded-[18px] bg-info shadow-md',
+          'relative flex h-full max-w-full flex-col items-center justify-center overflow-hidden rounded-[18px] bg-emphasis shadow-md',
           className
         )}
       >

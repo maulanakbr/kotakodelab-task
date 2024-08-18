@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { CurrentUser } from 'src/decorators/user.decorator';
-import { IStaff } from '../staff/entities/staff.entity';
 import { CompanyService } from './company.service';
 import { JwtAuthGuard } from '../auth/guard/auth.guard';
 import { CreateCompanyDto } from './dto/create-company-dto';
