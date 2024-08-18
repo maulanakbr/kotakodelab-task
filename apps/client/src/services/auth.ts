@@ -5,6 +5,8 @@ import { HYDRATE } from 'next-redux-wrapper'
 import { Auth, AuthRequest, AuthResponse, LogoutRequest } from '@/types/auth'
 import { apiBaseQuery } from '@/utils/api'
 
+import staffApi from './staffs'
+
 const initialState: Record<keyof Auth['ownerUser'], Auth['ownerUser'][keyof Auth['ownerUser']] | undefined> = {
   id: undefined,
   email: undefined,
@@ -61,7 +63,13 @@ const slice = createSlice({
       state.role = attributes.ownerUser.role
       state.username = attributes.ownerUser.username
       state.companyId = attributes.ownerUser.companyId
-    })
+    }),
+      builder.addMatcher(isAnyOf(staffApi.endpoints.putStaff.matchFulfilled), (state, { payload }) => {
+        const updatedUser = payload.data[0].attributes
+        if (state.id === updatedUser.id) {
+          state.username = updatedUser.username
+        }
+      })
   },
 })
 

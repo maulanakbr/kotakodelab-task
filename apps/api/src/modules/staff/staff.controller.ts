@@ -17,6 +17,8 @@ import { JwtAuthGuard } from '../auth/guard/auth.guard';
 import { AuthEntityTypeEnum } from 'src/types/enums';
 import { Role } from 'src/decorators/role.decorator';
 import { RoleGuard } from '../auth/guard/role.guard';
+import { CurrentUser } from 'src/decorators/user.decorator';
+import { IStaff } from './entities/staff.entity';
 
 @Controller({ version: '1', path: 'staffs' })
 export class StaffController {
@@ -46,10 +48,10 @@ export class StaffController {
     return { data: admin };
   }
 
-  @Put(':id')
+  @Put()
   @UseGuards(JwtAuthGuard)
-  async update(@Param('id') id: string, @Body() options: UpdateStaffDto) {
-    const admin = await this.staffService.update(id, options);
+  async update(@CurrentUser() user: IStaff, @Body() options: UpdateStaffDto) {
+    const admin = await this.staffService.update(user.id, options);
     return { data: admin };
   }
 }

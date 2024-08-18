@@ -1,5 +1,6 @@
-import type { BaseResponse } from '@/types/common'
 import type { RoleValues } from '@kotakodelab/lib'
+
+import type { BaseRequest, BaseResponse } from '@/types/common'
 
 // same with the attribute on responses
 export interface Staff {
@@ -17,5 +18,10 @@ export type StaffBrowseRequest = {
   pageSize: number
 }
 
+export type StaffUpdateForm = {
+  username: string
+}
+
 export type StaffBrowseResponse = BaseResponse<Staff>
 export type StaffDetailResponse = BaseResponse<Staff>
+export type StaffUpdateRequest = BaseRequest<StaffUpdateForm>
