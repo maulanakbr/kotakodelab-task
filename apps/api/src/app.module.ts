@@ -7,6 +7,7 @@ import { StaffModule } from './modules/staff/staff.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { AttendanceModule } from './modules/attendance/attendance.module';
 import { CompanyModule } from './modules/company/company.module';
+import { SeederModule } from './modules/seeders/seeder.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CompanyModule } from './modules/company/company.module';
         configService.postgresConfig,
       inject: [DatabaseConfigService],
     }),
+    SeederModule,
     AttendanceModule,
     StaffModule,
     CompanyModule,

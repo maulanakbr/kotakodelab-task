@@ -1,7 +1,7 @@
 import { authSlice } from '@/services/auth'
 
 const rootReducers = {
-  auth: authSlice.reducer,
+  [authSlice.name]: authSlice.reducer,
 }
 
 export default rootReducers

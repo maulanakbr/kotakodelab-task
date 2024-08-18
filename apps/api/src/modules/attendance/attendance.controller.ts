@@ -38,15 +38,10 @@ export class AttendanceController {
   @Role(AuthEntityTypeEnum.STAFF)
   @UseGuards(JwtAuthGuard, RoleGuard)
   async clockOut(
-    // @Param('attendanceId') attendanceId: string,
     @CurrentUser() user: IStaff,
     @Body() options: AttendanceClockOutDto,
   ) {
-    const attendance = await this.attendanceService.clockOut(
-      options,
-      user,
-      // attendanceId,
-    );
+    const attendance = await this.attendanceService.clockOut(options, user);
     return { data: attendance };
   }
 

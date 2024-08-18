@@ -30,17 +30,19 @@ export default function MutualStaff({ companyId, staffId }: MutualStaffProps) {
       <div className='max-w-full'>
         <h3 className='text-[18px] font-bold'>Mutual Staff</h3>
         <div className='mt-4 flex gap-3'>
-          {companyData?.data[0]?.attributes?.staffs
-            ?.filter((staff) => staff.id !== staffId)
-            .map((staff) => (
-              <span
-                key={staff.id}
-                className='flex size-12 cursor-pointer items-center justify-center rounded-full bg-inverted text-center font-semibold text-white shadow-md hover:bg-emphasis hover:text-emphasis'
-                onClick={() => handleShowMutualStaffModal(staff)}
-              >
-                <p>{`${staff.firstName[0].toUpperCase()}${staff.lastName[0].toUpperCase()}`}</p>
-              </span>
-            ))}
+          {companyData && companyData?.data[0]?.attributes?.staffs?.length > 1
+            ? companyData?.data[0]?.attributes?.staffs
+                ?.filter((staff) => staff.id !== staffId)
+                .map((staff) => (
+                  <span
+                    key={staff.id}
+                    className='flex size-12 cursor-pointer items-center justify-center rounded-full bg-inverted text-center font-semibold text-white shadow-md hover:bg-emphasis hover:text-emphasis'
+                    onClick={() => handleShowMutualStaffModal(staff)}
+                  >
+                    <p>{`${staff.firstName[0].toUpperCase()}${staff.lastName[0].toUpperCase()}`}</p>
+                  </span>
+                ))
+            : '-'}
         </div>
       </div>
       <MutualStaffModal

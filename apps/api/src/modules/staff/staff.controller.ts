@@ -19,15 +19,16 @@ import { Role } from 'src/decorators/role.decorator';
 import { RoleGuard } from '../auth/guard/role.guard';
 import { CurrentUser } from 'src/decorators/user.decorator';
 import { IStaff } from './entities/staff.entity';
+import { Public } from 'src/decorators/public.decorator';
 
 @Controller({ version: '1', path: 'staffs' })
 export class StaffController {
   constructor(private readonly staffService: StaffService) {}
 
   @Post()
-  @Role(AuthEntityTypeEnum.SUPERADMIN, AuthEntityTypeEnum.ADMIN)
+  // @Role(AuthEntityTypeEnum.SUPERADMIN)
   @UseGuards(JwtAuthGuard, RoleGuard)
-  // @Public()
+  @Public()
   async create(@Body() options: CreateStaffDto) {
     const staff = await this.staffService.create(options);
     return { data: staff };

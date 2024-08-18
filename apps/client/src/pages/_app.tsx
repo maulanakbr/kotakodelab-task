@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { I18nextProvider } from 'react-i18next'
+import { PersistGate } from 'redux-persist/lib/integration/react'
 
 import '@/styles/theme.css'
 
@@ -11,7 +12,7 @@ import MainContainer from '@/components/containers/MainContainer'
 import Loading from '@/components/Loading'
 import i18n from '@/config/i18n'
 import CheckingUserToken from '@/layouts/CheckingUserToken'
-import { wrapper } from '@/store'
+import { persistor, wrapper } from '@/store'
 
 const MyApp: React.FC<AppProps> = (props) => {
   const { Component, pageProps } = props
@@ -64,7 +65,12 @@ const MyApp: React.FC<AppProps> = (props) => {
       />
       <MainContainer>
         <CheckingUserToken>
-          <Component {...pageProps} />
+          <PersistGate
+            loading={null}
+            persistor={persistor}
+          >
+            <Component {...pageProps} />
+          </PersistGate>
         </CheckingUserToken>
       </MainContainer>
     </I18nextProvider>

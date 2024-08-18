@@ -1,6 +1,5 @@
 import { type RoleValues, ROLES } from '@kotakodelab/lib'
 
-import AdminLayout from '@/layouts/AdminLayout'
 import StaffLayout from '@/layouts/StaffLayout'
 import SuperAdminLayout from '@/layouts/SuperAdminLayout'
 
@@ -12,11 +11,10 @@ interface ShellProps extends React.HTMLAttributes<HTMLDivElement> {
   staffId: string
 }
 
-type LayoutValues = typeof SuperAdminLayout | typeof AdminLayout | typeof StaffLayout
+type LayoutValues = typeof SuperAdminLayout | typeof StaffLayout
 
 const layoutOptions: Record<RoleValues, LayoutValues> = {
   [ROLES['SUPERADMIN']]: SuperAdminLayout,
-  [ROLES['ADMIN']]: AdminLayout,
   [ROLES['STAFF']]: StaffLayout,
 }
 

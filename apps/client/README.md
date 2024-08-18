@@ -51,8 +51,8 @@ yarn install --frozen-lockfile
 
 - [x] Staff should be able to login
 - [x] Staff should be able to logout
-- [ ] Staff should be able to see another staff
-- [ ] Staff should be able to update the staff data
-- [ ] Staff should not be able to update another staff data
-- [ ] Staff should be able to clock in
-- [ ] Staff should be able to clock out
+- [x] Staff should be able to see another staff
+- [x] Staff should be able to update the staff data
+- [x] Staff should not be able to update another staff data
+- [x] Staff should be able to clock in
+- [x] Staff should be able to clock out

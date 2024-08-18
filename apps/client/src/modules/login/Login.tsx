@@ -3,6 +3,9 @@ import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { Button } from '@/components/ui/Button'
+import { Input } from '@/components/ui/Input'
+import { Label } from '@/components/ui/Label'
 import { USER_ACCESS_TOKEN } from '@/config/token'
 import MobileLayout from '@/layouts/MobileLayout'
 import { usePostLoginMutation } from '@/services/auth'
@@ -44,21 +47,21 @@ const Login = () => {
   return (
     <MobileLayout title='Login'>
       <div className='min-w-screen flex min-h-screen grow flex-col items-center justify-center space-y-10 px-10'>
-        <h1 className='text-[24px]'>Wellcome to HR System</h1>
+        <h1 className='text-[24px]'>Welcome to HR System</h1>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
           className='flex w-full flex-col space-y-5'
         >
           <div className='flex flex-col space-y-2'>
-            <label
+            <Label
               htmlFor='username'
               className='text-sm font-semibold text-black'
             >
               Username
-            </label>
+            </Label>
 
-            <input
+            <Input
               {...register('username', { required: 'Username is required!' })}
               id='username'
               type='text'
@@ -67,14 +70,14 @@ const Login = () => {
           </div>
 
           <div className='flex flex-col space-y-2'>
-            <label
+            <Label
               htmlFor='password'
               className='text-sm font-semibold text-black'
             >
               Password
-            </label>
+            </Label>
 
-            <input
+            <Input
               {...register('password', { required: 'Password is required!' })}
               id='password'
               type='password'
@@ -82,9 +85,7 @@ const Login = () => {
             />
           </div>
 
-          <button className='w-full rounded-md border bg-blue-500 py-2 text-[24px] text-white hover:bg-blue-400'>
-            Login
-          </button>
+          <Button>Login</Button>
         </form>
       </div>
     </MobileLayout>

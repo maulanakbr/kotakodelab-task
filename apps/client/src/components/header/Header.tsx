@@ -12,7 +12,7 @@ import { Button } from '../ui/Button'
 
 export default function Header() {
   const router = useRouter()
-  const { id } = useAppSelector((state) => state.auth)
+  const { id } = useAppSelector((state) => state.authSlice)
 
   const [doLogout, { isSuccess: logoutSuccess, isLoading: isLoggingOut, isError: logoutError }] =
     usePostLogoutMutation()
@@ -49,8 +49,8 @@ export default function Header() {
           <Image
             src='/logo.png'
             alt='Company Logo'
-            width={100}
-            height={100}
+            width={90}
+            height={90}
             priority
           />
         </div>

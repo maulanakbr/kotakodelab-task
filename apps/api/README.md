@@ -43,7 +43,7 @@ to add. We are looking forward to hearing from you!
 - [x] Should be able to update Staff
 - [x] Staff should be able to login
 - [x] Staff should be able to logout
-- [] Staff should not be able to update another staff dat
+- [x] Staff should not be able to update another staff dat
 - [x] Staff should be able to clock in
 - [x] Staff should be able to clock out
 

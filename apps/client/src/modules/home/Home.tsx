@@ -6,7 +6,7 @@ import Attendance from '@/components/shared/Attendance'
 import { useAppSelector } from '@/utils/hooks'
 
 export default function Home() {
-  const { id, role, username, companyId } = useAppSelector((state) => state.auth)
+  const { id, role, username, companyId } = useAppSelector((state) => state.authSlice)
 
   return (
     <Shell
